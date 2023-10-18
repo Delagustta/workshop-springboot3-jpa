@@ -2,6 +2,7 @@ package com.udemy.course.config;
 
 import com.udemy.course.entities.Order;
 import com.udemy.course.entities.User;
+import com.udemy.course.entities.enums.OrderStatus;
 import com.udemy.course.repositories.OrderRepository;
 import com.udemy.course.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +34,9 @@ public class DevProfileConfig implements CommandLineRunner { // <== Implemento e
         User u1 = new User(null, "Maria Brown", "maria@mail.com", "99999999", "123456");
         User u2 = new User(null, "Alex Green", "alex@mail.com", "98888888", "987654");
 
-        Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), u1);
-        Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), u2);
-        Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u1);
+        Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.PAID, u1);
+        Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.WAITING_PAYMENT, u2);
+        Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.WAITING_PAYMENT, u1);
 
         userRepository.saveAll(List.of(u1, u2));
         orderRepository.saveAll(List.of(o1, o2, o3));
