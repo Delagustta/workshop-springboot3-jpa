@@ -2,4 +2,4 @@ spring:
   profiles:
     active: dev
   jpa:
-    open-in-view: true
+    open-in-view: true # Permite que o jackson acione o jpa para trazer no JSON os objetos relacionados da entidade automaticamente

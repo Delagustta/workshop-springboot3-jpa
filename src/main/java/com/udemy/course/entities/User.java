@@ -1,5 +1,6 @@
 package com.udemy.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -19,6 +20,7 @@ public class User implements Serializable {
     private String phone;
     private String password;
 
+    @JsonIgnore // Lazy loading - Quando temos o 'ToMany' relacionado, geralmente ignoramos com essa annotation para evitar referencia infinita
     @OneToMany(mappedBy = "client") // 1 usuario possui varios PEDIDOS // Precisa colocar o atributo relacionado na outra classe
     private List<Order> orders = new ArrayList<>();
 
