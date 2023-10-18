@@ -3,6 +3,8 @@ package com.udemy.course.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -16,6 +18,9 @@ public class User implements Serializable {
     private String email;
     private String phone;
     private String password;
+
+    @OneToMany(mappedBy = "client") // 1 usuario possui varios PEDIDOS // Precisa colocar o atributo relacionado na outra classe
+    private List<Order> orders = new ArrayList<>();
 
     public User() {
     }
@@ -46,6 +51,10 @@ public class User implements Serializable {
 
     public String getEmail() {
         return email;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
     public void setEmail(String email) {
