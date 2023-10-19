@@ -1,8 +1,10 @@
 package com.udemy.course.config;
 
+import com.udemy.course.entities.Category;
 import com.udemy.course.entities.Order;
 import com.udemy.course.entities.User;
 import com.udemy.course.entities.enums.OrderStatus;
+import com.udemy.course.repositories.CategoryRepository;
 import com.udemy.course.repositories.OrderRepository;
 import com.udemy.course.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +22,13 @@ public class DevProfileConfig implements CommandLineRunner { // <== Implemento e
 
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;
+    private final CategoryRepository categoryRepository;
 
     @Autowired
-    public DevProfileConfig(UserRepository userRepository, OrderRepository orderRepository) {
+    public DevProfileConfig(UserRepository userRepository, OrderRepository orderRepository, CategoryRepository categoryRepository) {
         this.userRepository = userRepository;
         this.orderRepository = orderRepository;
+        this.categoryRepository = categoryRepository;
     }
 
 
@@ -38,7 +42,12 @@ public class DevProfileConfig implements CommandLineRunner { // <== Implemento e
         Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.WAITING_PAYMENT, u2);
         Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.WAITING_PAYMENT, u1);
 
+        Category cat1 = new Category(null, "Electronics");
+        Category cat2 = new Category(null, "Books");
+        Category cat3 = new Category(null, "Computers");
+
         userRepository.saveAll(List.of(u1, u2));
         orderRepository.saveAll(List.of(o1, o2, o3));
+        categoryRepository.saveAll(List.of(cat1, cat2, cat3));
     }
 }
