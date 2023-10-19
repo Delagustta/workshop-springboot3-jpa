@@ -2,10 +2,12 @@ package com.udemy.course.config;
 
 import com.udemy.course.entities.Category;
 import com.udemy.course.entities.Order;
+import com.udemy.course.entities.Product;
 import com.udemy.course.entities.User;
 import com.udemy.course.entities.enums.OrderStatus;
 import com.udemy.course.repositories.CategoryRepository;
 import com.udemy.course.repositories.OrderRepository;
+import com.udemy.course.repositories.ProductRepository;
 import com.udemy.course.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -23,12 +25,14 @@ public class DevProfileConfig implements CommandLineRunner { // <== Implemento e
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;
     private final CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
-    public DevProfileConfig(UserRepository userRepository, OrderRepository orderRepository, CategoryRepository categoryRepository) {
+    public DevProfileConfig(UserRepository userRepository, OrderRepository orderRepository, CategoryRepository categoryRepository, ProductRepository productRepository) {
         this.userRepository = userRepository;
         this.orderRepository = orderRepository;
         this.categoryRepository = categoryRepository;
+        this.productRepository = productRepository;
     }
 
 
@@ -46,8 +50,15 @@ public class DevProfileConfig implements CommandLineRunner { // <== Implemento e
         Category cat2 = new Category(null, "Books");
         Category cat3 = new Category(null, "Computers");
 
+        Product p1 = new Product(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+        Product p2 = new Product(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
+        Product p3 = new Product(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
+        Product p4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
+        Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
+
         userRepository.saveAll(List.of(u1, u2));
         orderRepository.saveAll(List.of(o1, o2, o3));
         categoryRepository.saveAll(List.of(cat1, cat2, cat3));
+        productRepository.saveAll(List.of(p1, p2, p3, p4, p5));
     }
 }
