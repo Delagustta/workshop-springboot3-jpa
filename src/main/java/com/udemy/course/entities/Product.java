@@ -19,8 +19,12 @@ public class Product implements Serializable {
     private Double price;
     private String imgUrl;
 
-    @Transient // Impede que o jpa interprete esse campo (para evitar erro de associacao) - usei antes de criar a associacao para testar a application
-    private Set<Category> categories = new HashSet<>();
+    //    @Transient // Impede que o jpa interprete esse campo (para evitar erro de associacao) - usei antes de criar a associacao para testar a application
+    @ManyToMany
+    @JoinTable(name = "tb_product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories;
 
     public Product() {
     }
@@ -31,6 +35,7 @@ public class Product implements Serializable {
         this.description = description;
         this.price = price;
         this.imgUrl = imgUrl;
+        this.categories = new HashSet<>();
     }
 
     public Long getId() {

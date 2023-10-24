@@ -1,5 +1,6 @@
 package com.udemy.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -16,8 +17,10 @@ public class Category implements Serializable {
     private Long id;
     private String name;
 
-    @Transient // Impede que o jpa interprete esse campo (para evitar erro de associacao) - usei antes de criar a associacao para testar a application
-    private Set<Product> products = new HashSet<>();
+    //    @Transient // Impede que o jpa interprete esse campo (para evitar erro de associacao) - usei antes de criar a associacao para testar a application
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
+    private Set<Product> products;
 
     public Category() {
     }
@@ -25,6 +28,7 @@ public class Category implements Serializable {
     public Category(Long id, String name) {
         this.id = id;
         this.name = name;
+        this.products = new HashSet<>();
     }
 
     public Long getId() {
