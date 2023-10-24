@@ -1,14 +1,8 @@
 package com.udemy.course.config;
 
-import com.udemy.course.entities.Category;
-import com.udemy.course.entities.Order;
-import com.udemy.course.entities.Product;
-import com.udemy.course.entities.User;
+import com.udemy.course.entities.*;
 import com.udemy.course.entities.enums.OrderStatus;
-import com.udemy.course.repositories.CategoryRepository;
-import com.udemy.course.repositories.OrderRepository;
-import com.udemy.course.repositories.ProductRepository;
-import com.udemy.course.repositories.UserRepository;
+import com.udemy.course.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -26,13 +20,15 @@ public class DevProfileConfig implements CommandLineRunner { // <== Implemento e
     private final OrderRepository orderRepository;
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
+    private final OrderItemRepository orderItemRepository;
 
     @Autowired
-    public DevProfileConfig(UserRepository userRepository, OrderRepository orderRepository, CategoryRepository categoryRepository, ProductRepository productRepository) {
+    public DevProfileConfig(UserRepository userRepository, OrderRepository orderRepository, CategoryRepository categoryRepository, ProductRepository productRepository, OrderItemRepository orderItemRepository) {
         this.userRepository = userRepository;
         this.orderRepository = orderRepository;
         this.categoryRepository = categoryRepository;
         this.productRepository = productRepository;
+        this.orderItemRepository = orderItemRepository;
     }
 
 
@@ -71,5 +67,16 @@ public class DevProfileConfig implements CommandLineRunner { // <== Implemento e
 
         userRepository.saveAll(List.of(u1, u2));
         orderRepository.saveAll(List.of(o1, o2, o3, o4));
+
+        OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+        OrderItem oi5 = new OrderItem(o4, p5, 2, p5.getPrice());
+        OrderItem oi6 = new OrderItem(o4, p1, 2, p1.getPrice());
+        OrderItem oi7 = new OrderItem(o4, p4, 2, p4.getPrice());
+
+        orderItemRepository.saveAll(List.of(oi1, oi2, oi3, oi4, oi5, oi6, oi7));
+
     }
 }
