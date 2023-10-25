@@ -78,5 +78,10 @@ public class DevProfileConfig implements CommandLineRunner { // <== Implemento e
 
         orderItemRepository.saveAll(List.of(oi1, oi2, oi3, oi4, oi5, oi6, oi7));
 
+        Payment pay1 = new Payment(null, Instant.parse("2019-06-20T21:53:07Z"), o1);
+        o1.setPayment(pay1);
+
+        orderRepository.save(o1);
+
     }
 }
