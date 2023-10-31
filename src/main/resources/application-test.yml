@@ -1,0 +1,24 @@
+# Datasource
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/springboot_course
+    username: postgres
+    password: 1234567
+
+# JPA, SQL
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
+
+jwt:
+  secret: MYJWTSECRET
+  expiration: 3600000
